@@ -1,1 +1,1 @@
-Application GuestBook is deployed
+Application cumulusbank is deployed
