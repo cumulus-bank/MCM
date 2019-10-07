@@ -1,0 +1,17 @@
+apiVersion: mcm.ibm.com/v1alpha1
+kind: Deployable
+metadata:
+  name: {{ template "cumulusbank.fullname" . }}-authsvc
+  labels:
+    app: {{ template "cumulusbank.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    name: {{ template "cumulusbank.fullname" . }}-authsvc
+    servicekind: CacheService
+spec:
+  deployer:
+    kind: helm
+    helm:
+      chartURL: "https://raw.githubusercontent.com/cumulus-bank/authentication-mariadb/master/chart/authenticationMicroservice-0.1.0.tgz"
+      namespace: {{ .Values.appInClusterNamespace }}

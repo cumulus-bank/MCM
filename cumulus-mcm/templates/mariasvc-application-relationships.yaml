@@ -1,0 +1,17 @@
+apiVersion: mcm.ibm.com/v1alpha1
+kind: ApplicationRelationship
+metadata:
+  name: {{ template "cumulusbank.fullname" . }}-maria
+  labels:
+    app: {{ template "cumulusbank.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  type: contains
+  source:
+    kind: Application
+    name: {{ template "cumulusbank.fullname" . }}
+  destination:
+    kind: Deployable
+    name: {{ template "cumulusbank.fullname" . }}-maria

@@ -1,0 +1,19 @@
+apiVersion: mcm.ibm.com/v1alpha1
+kind: PlacementPolicy
+metadata:
+  name: {{ template "cumulusbank.fullname" . }}-aisvc
+  labels:
+    app: {{ template "cumulusbank.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    name: {{ template "cumulusbank.fullname" . }}
+    servicekind: CacheService
+spec:
+  clusterReplicas: {{ .Values.replicaCount }}
+  clusterLabels:
+    matchLabels:
+{{ toYaml .Values.targetClusteraisvc.labelSelector.matchLabels | indent 6 }}
+  resourceHint:
+{{ toYaml .Values.targetClusteraisvc.resourceSelector | indent 4 }}
+  compliances: {{ .Values.targetClusteraisvc.compliances }}

@@ -1,0 +1,17 @@
+apiVersion: app.k8s.io/v1beta1
+kind: Application
+metadata:
+  name: {{ template "cumulusbank.fullname" . }}
+  labels:
+    app: {{ template "cumulusbank.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    name: {{ template "cumulusbank.fullname" . }}
+spec:
+  selector:
+    matchExpressions:
+    - key: app
+  componentKinds:
+  - group: core
+    kind: Pods

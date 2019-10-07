@@ -1,0 +1,17 @@
+apiVersion: mcm.ibm.com/v1alpha1
+kind: Deployable
+metadata:
+  name: {{ template "cumulusbank.fullname" . }}-accountsvc
+  labels:
+    app: {{ template "cumulusbank.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    name: {{ template "cumulusbank.fullname" . }}-accountsvc
+    servicekind: CacheService
+spec:
+  deployer:
+    kind: helm
+    helm:
+      chartURL: "https://raw.githubusercontent.com/cumulus-bank/Accounts-Microservice/master/chart/accountsMicroservice-0.1.0.tgz"
+      namespace: {{ .Values.appInClusterNamespace }}

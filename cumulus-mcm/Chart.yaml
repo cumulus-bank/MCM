@@ -1,0 +1,4 @@
+apiVersion: v1
+description: Cumulusbank microservices
+name: bank
+version: 0.1.0

@@ -1,0 +1,19 @@
+apiVersion: mcm.ibm.com/v1alpha1
+kind: PlacementBinding
+metadata:
+  name: {{ template "cumulusbank.fullname" . }}-aisvc
+  labels:
+    app: {{ template "cumulusbank.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    name: {{ template "cumulusbank.fullname" . }}
+    servicekind: CacheService
+placementRef:
+  apiGroup: mcm.ibm.com
+  kind: PlacementPolicy
+  name: {{ template "cumulusbank.fullname" . }}-aisvc
+subjects:
+- apiGroup: mcm.ibm.com
+  kind: Deployable
+  name: {{ template "cumulusbank.fullname" . }}-aisvc
